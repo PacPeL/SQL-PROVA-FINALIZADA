@@ -2,23 +2,23 @@
 
 --2 - Buscar o nome e ano dos filmes, ordenados por ordem crescente pelo ano
 
---3 - Buscar pelo filme de volta para o futuro, trazendo o nome, ano e a duração
+--3 - Buscar pelo filme de volta para o futuro, trazendo o nome, ano e a duraÃ§Ã£o
 
---4 - Buscar os filmes lançados em 1997
+--4 - Buscar os filmes lanÃ§ados em 1997
 
---5 - Buscar os filmes lançados APÓS o ano 2000
+--5 - Buscar os filmes lanÃ§ados APÃ“S o ano 2000
 
 --6 - Buscar os filmes com a duracao maior que 100 e menor que 150, ordenando pela duracao em ordem crescente
 
---7 - Buscar a quantidade de filmes lançadas no ano, agrupando por ano, ordenando pela duracao em ordem decrescente
+--7 - Buscar a quantidade de filmes lanÃ§adas no ano, agrupando por ano, ordenando pela duracao em ordem decrescente
 
---8 - Buscar os Atores do gênero masculino, retornando o PrimeiroNome, UltimoNome
+--8 - Buscar os Atores do gÃªnero masculino, retornando o PrimeiroNome, UltimoNome
 
---9 - Buscar os Atores do gênero feminino, retornando o PrimeiroNome, UltimoNome, e ordenando pelo PrimeiroNome
+--9 - Buscar os Atores do gÃªnero feminino, retornando o PrimeiroNome, UltimoNome, e ordenando pelo PrimeiroNome
 
---10 - Buscar o nome do filme e o gênero
+--10 - Buscar o nome do filme e o gÃªnero
 
---11 - Buscar o nome do filme e o gênero do tipo "Mistério"
+--11 - Buscar o nome do filme e o gÃªnero do tipo "MistÃ©rio"
 
 --12 - Buscar o nome do filme e os atores, trazendo o PrimeiroNome, UltimoNome e seu Papel
 
@@ -97,7 +97,7 @@ SELECT * FROM Filmes
 WHERE Duracao > 100 AND Duracao < 150
 
 ----------------------------------------- 7
---7 - Buscar a quantidade de filmes lançadas no ano, agrupando por ano, ordenando pela duracao em ordem decrescente
+--7 - Buscar a quantidade de filmes lanÃ§adas no ano, agrupando por ano, ordenando pela duracao em ordem decrescente
 
 SELECT Ano, Duracao, COUNT(Ano) AS TotalDeFilmesNoAno
 FROM Filmes
@@ -162,9 +162,9 @@ CREATE TABLE FilmesGenero(
 	FOREIGN KEY (IdFilme) REFERENCES Filmes(IdFilme),
 )
 
---10 - Buscar o nome do filme e o gênero
+--10 - Buscar o nome do filme e o gÃªnero
 
---11 - Buscar o nome do filme e o gênero do tipo "Mistério"
+--11 - Buscar o nome do filme e o gÃªnero do tipo "MistÃ©rio"
 
 --12 - Buscar o nome do filme e os atores, trazendo o PrimeiroNome, UltimoNome e seu Papel
 
@@ -229,12 +229,12 @@ SELECT * FROM Filmes
 WHERE Duracao > 100 AND Duracao < 150
 
 ----------------------------------------- 7
---7 - Buscar a quantidade de filmes lançadas no ano, agrupando por ano, ordenando pela duracao em ordem decrescente
+--7 - Buscar a quantidade de filmes lanÃ§adas no ano, agrupando por ano, ordenando pela duracao em ordem decrescente
 
-SELECT Ano, Duracao, COUNT(Ano) AS TotalDeFilmesNoAno
+SELECT YEAR(Ano) AnoLancamento, COUNT(*) AS QuantidadeFilmes, MAX(Duracao) AS MaiorDuracao
 FROM Filmes
-GROUP BY Ano, Duracao
-ORDER BY Duracao DESC
+GROUP BY YEAR(Ano)
+ORDER BY MaiorDuracao DESC;
 
 --------------------------------------8
 
@@ -272,4 +272,5 @@ WHERE Genero = 'Misterio'
 SELECT Nome, PrimeiroNome, UltimoNome, Papel
 FROM Filmes
 INNER JOIN ElencoFilme ON ElencoFilme.IdFilme = Filmes.IdFilme
+
 INNER JOIN Atores ON Atores.IdAtor = ElencoFilme.IdAtor
